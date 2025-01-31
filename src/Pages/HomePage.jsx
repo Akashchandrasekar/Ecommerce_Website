@@ -12,14 +12,16 @@ const HomePage = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get("https://fakestoreapi.com/products");
+        console.log("API Response:", response); // Debugging
         setProducts(response.data);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
     };
-
+  
     fetchData();
   }, []);
+  
 
   // Function to handle adding to cart with animation
   const handleAddToCart = (product) => {

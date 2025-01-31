@@ -7,6 +7,7 @@ import SignUp from "./Pages/SignUp";  // Example for SignUp page
 import { CartProvider } from "./Components/CartContext";  // Cart Context
 import { AuthProvider } from "./Components/AuthContext";  // Auth Context
 import Footer from "./Components/Footer";
+import CartPage from "./Pages/CartPage";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
               <Route path="/" element={<HomePage />} />
               <Route path="/signin" element={<SignIn />} />
               <Route path="/signup" element={<SignUp />} />
+              <Route path="/cart" element={<CartPage />} />
               {/* Add more routes here */}
             </Routes>
             <Footer/>
