@@ -9,19 +9,24 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = login(email, password);
-    if (response.success) {
-      navigate("/");
-    } else {
-      setError(response.message);
+    try {
+      const response = await login(email, password);
+      if (response?.success) {
+        navigate("/");
+      } else {
+        setError(response?.message || "Invalid credentials");
+      }
+    } catch (err) {
+      setError("Something went wrong. Please try again.");
     }
   };
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-gray-900 via-gray-700 to-yellow-300">
-      <div className="bg-white p-8 rounded-2xl shadow-xl w-96 max-w-md">
+      <div className="bg-white p-8 rounded-2xl shadow-xl   w-96 max-w-md">
         <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6">
           Sign In
         </h2>
@@ -38,7 +43,7 @@ const SignIn = () => {
               type="email"
               id="email"
               placeholder="Enter your email"
-              className="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+              className="w-full p-3 border border-gray-300 rounded-xl shadow-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -54,7 +59,7 @@ const SignIn = () => {
               type="password"
               id="password"
               placeholder="Enter your password"
-              className="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+              className="w-full p-3 border border-gray-300 text-gray-800 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
